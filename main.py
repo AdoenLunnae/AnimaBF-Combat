@@ -1,11 +1,11 @@
 # -*-coding:utf-8 -*-
 
-import math
 import tkinter as tk
 from tkinter import ttk
+from func import *
 
 
-class App():
+class App:
     def __init__(self):
         self.raiz = tk.Tk()
         self.raiz.title("AnimaCombatHelper")
@@ -55,7 +55,7 @@ class App():
         drollbox.grid(column=0, row=1)
         defbox.grid(column=1, row=1)
         taselect.grid(column=2, row=1)
-        final = ttk.Label(self.raiz, text='0')
+        final = ttk.Label(self.raiz, text='No pasa nada')
         final.grid(column=0, row=2)
         acubutton.grid(column=1, row=2)
         while 1:
@@ -68,40 +68,12 @@ class App():
                 defbox.configure(state='normal')
                 drollbox.configure(state='normal')
             try:
-                final.configure(text=self.getdmg(int(atq.get()), int(aroll.get()), int(dmg.get()),
-                                                          int(deff.get()), int(droll.get()), int(ta.get()), acu.get()))
+                final.configure(text=getdmg(int(atq.get()), int(aroll.get()), int(dmg.get()),
+                                            int(deff.get()), int(droll.get()), int(ta.get()), acu.get()))
             except ValueError:
-                final.configure(text=0)
+                final.configure(text='No pasa nada')
             self.raiz.update_idletasks()
             self.raiz.update()
-
-    def getdmg(self, atq, aroll, base, deff, droll, ta, acu):
-        if acu:
-            abs = 20+10*ta
-            diff = 10 * math.trunc((atq + aroll - abs) / 10)
-            if diff > 0:
-                dmg = base*diff//100
-                if dmg > 0:
-                    return u'{}%. {} de daño'.format(diff, dmg)
-                else:
-                    return u'No produce daño'
-            elif diff < 0:
-                return u'No produce daño'
-
-        else:
-            diff = 10*math.trunc((atq+aroll-deff-droll)/10)
-            if diff > 0:
-                abso = 20+10*ta
-                diff -= abso
-                dmg = base*diff//100
-                if dmg > 0:
-                    return '{}%. {} de daño'.format(diff, dmg)
-                else:
-                    return 'A la defensiva'
-            elif diff < 0:
-                contr = -diff//2
-                return 'Contraataque con +{}'.format(contr)
-
 
 
 def main():

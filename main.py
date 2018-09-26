@@ -20,9 +20,10 @@ class App:
         drolllabel = ttk.Label(defframe, text='Tirada')
         deflabel = ttk.Label(defframe, text='Hab. Defensa')
         talabel = ttk.Label(defframe, text='TA')
+        numdeflabel = ttk.Label(defframe, text=u'Defensa Nº')
 
-        aroll, atq, dmg, droll, deff, ta, acu = tk.StringVar(), tk.StringVar(), tk.StringVar(), tk.StringVar(), \
-            tk.StringVar(), tk.StringVar(), tk.IntVar()
+        aroll, atq, dmg, droll, deff, ta, acu, numdef = tk.StringVar(), tk.StringVar(), tk.StringVar(), tk.StringVar(), \
+            tk.StringVar(), tk.StringVar(), tk.IntVar(), tk.StringVar()
         aroll.set(0)
         droll.set(0)
         atq.set(0)
@@ -36,8 +37,11 @@ class App:
         dmgbox = ttk.Entry(atqframe, width=12, textvariable=dmg)
         taselect = ttk.Combobox(defframe, width=10, textvariable=ta)
         acubutton = ttk.Checkbutton(defframe, text=u'Acumulación', variable=acu)
+        numdef = ttk.Combobox(defframe, width=10, textvariable=numdef)
         taselect['values'] = (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
+        numdef['values'] = (u'1ª', u'2ª', u'3ª', u'4ª', u'5ª+')
         taselect.current(0)
+        numdef.current(0)
 
         atqframe.grid(column=0, row=0)
         defframe.grid(column=0, row=1)
@@ -57,7 +61,9 @@ class App:
         taselect.grid(column=2, row=1)
         final = ttk.Label(self.raiz, text='No pasa nada')
         final.grid(column=0, row=2)
-        acubutton.grid(column=1, row=2)
+        acubutton.grid(column=0, row=2)
+        numdeflabel.grid(column=1, row=2)
+        numdef.grid(column=2, row=2)
         while 1:
             if acu.get():
                 deff.set(0)
@@ -69,7 +75,7 @@ class App:
                 drollbox.configure(state='normal')
             try:
                 final.configure(text=getdmg(int(atq.get()), int(aroll.get()), int(dmg.get()),
-                                            int(deff.get()), int(droll.get()), int(ta.get()), acu.get()))
+                                            int(deff.get()), int(droll.get()), int(ta.get()), acu.get(), int(numdef.get()[0])))
             except ValueError:
                 final.configure(text='No pasa nada')
             self.raiz.update_idletasks()

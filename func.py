@@ -2,7 +2,7 @@
 import math
 
 
-def getdmg(atq, aroll, base, deff, droll, ta, acu):
+def getdmg(atq, aroll, base, deff, droll, ta, acu, numdef):
     if acu:
         abs = 20 + 10 * ta
         diff = 10 * math.trunc((atq + aroll - abs) / 10)
@@ -16,7 +16,10 @@ def getdmg(atq, aroll, base, deff, droll, ta, acu):
             return u'No produce daño'
 
     else:
-        diff = 10 * math.trunc((atq + aroll - deff - droll) / 10)
+        pendef=[0, -30, -50, -70, -90]
+        totalat= atq+aroll
+        totaldef= deff+droll+pendef[numdef]
+        diff = 10 * math.trunc((totalat-totaldef) / 10)
         if diff > 0:
             abso = 20 + 10 * ta
             diff -= abso

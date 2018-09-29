@@ -18,7 +18,7 @@ def getdmg(atq, aroll, base, deff, droll, ta, acu, numdef):
     else:
         pendef=[0, -30, -50, -70, -90]
         totalat= atq+aroll
-        totaldef= deff+droll+pendef[numdef]
+        totaldef= deff+droll+pendef[numdef-1]
         diff = 10 * math.trunc((totalat-totaldef) / 10)
         if diff > 0:
             abso = 20 + 10 * ta

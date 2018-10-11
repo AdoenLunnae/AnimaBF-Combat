@@ -16,4 +16,4 @@ modifdef = {'A la defensiva': 10, 'A la ofensiva': -30, u'Adversario diminuto(Pa
             'Proyectil Disparado(Escudo)': -20, 'Proyectil Lanzado(Parada)': -50, 'Sorpresa': -90, 'Vuelo 7-14': 10,
             'Vuelo 15+(Esquiva)': 20, 'Vuelo 15+(Parada)': 10}
 
-print(len(modifdef.keys()))
+

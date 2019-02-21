@@ -19,6 +19,7 @@ class App:
         notebook.add(calc, text=u'Calculadora de daño')
         notebook.add(mod, text='Modificadores')
         notebook.pack(expand=1, fill='both')
+
     # ----------------Damage Calculator---------------- #
         # Create Labels
         atqframe = ttk.LabelFrame(calc, text='Atacante')
@@ -141,8 +142,8 @@ class App:
             try:
                 final.configure(text=getdmg(int(atq.get()), int(aroll.get()), int(dmg.get()),
                                             int(deff.get()), int(droll.get()), int(ta.get()),
-                                            acu.get(), int(numdef.get()[0]), getmodat(atqmodvars, atqmodhalfs),
-                                            getmoddef(defmodvars)))
+                                            acu.get(), int(numdef.get()[0]), getmodat(atqmodvars,
+                                            atqmodhalfs), getmoddef(defmodvars)))
             except ValueError:
                 final.configure(text='No pasa nada')
             self.raiz.update_idletasks()
